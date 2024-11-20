@@ -31,39 +31,43 @@ namespace ConsoleRpgEntities.Models.Characters
             int attack = 0;
             int defense = 0;
 
-            if (Equipment.Weapon != null)
-            {
-                attack = Equipment.Weapon.Attack;
-            }
             if (Equipment.Armor != null)
             {
                 defense = Equipment.Armor.Defense;
             }
-
-            // Damage calculations
-            decimal damage = (roll + attack) / ((0 + 100) / 100);
-
-            // Total damage
-            int totalDamage = (int)Math.Round(damage, MidpointRounding.AwayFromZero);
-            int overkill = totalDamage + (target.Health - totalDamage);
-
-            // Player-specific attack logic
-            Console.WriteLine($"{Name} attacks {target.Name} with a {Equipment.Weapon.Name}!");
-            target.Health -= totalDamage;
-            if (target.Health > 0)
+            if (Equipment.Weapon != null)
             {
-                Console.WriteLine($"{target.Name} took {totalDamage} damage.");
+                attack = Equipment.Weapon.Attack;
+
+                // Damage calculations
+                decimal damage = (roll + attack) / ((0 + 100) / 100);
+
+                // Total damage
+                int totalDamage = (int)Math.Round(damage, MidpointRounding.AwayFromZero);
+                int overkill = totalDamage + (target.Health - totalDamage);
+
+                // Player-specific attack logic
+                Console.WriteLine($"{Name} attacks {target.Name} with a {Equipment.Weapon.Name}!");
+                target.Health -= totalDamage;
+                if (target.Health > 0)
+                {
+                    Console.WriteLine($"{target.Name} took {totalDamage} damage.");
+                }
+                else
+                {
+                    if (target.Health - totalDamage < 0)
+                    {
+                        Console.WriteLine($"{target.Name} took {overkill} damage.\n{target.Name} has been defeated.");
+                    }
+                    else if (target.Health - totalDamage == 0)
+                    {
+                        Console.WriteLine($"{target.Name} took {totalDamage} damage.\n{target.Name} has been defeated.");
+                    }
+                }
             }
             else
             {
-                if (target.Health - totalDamage < 0)
-                {
-                    Console.WriteLine($"{target.Name} took {overkill} damage.\n{target.Name} has been defeated.");
-                }
-                else if (target.Health - totalDamage == 0)
-                {
-                    Console.WriteLine($"{target.Name} took {totalDamage} damage.\n{target.Name} has been defeated.");
-                }
+                Console.WriteLine($"{Name} has no weapon!", ConsoleColor.Red);
             }
         }
 
@@ -162,7 +166,6 @@ namespace ConsoleRpgEntities.Models.Characters
                             Equipment.Weapon = chosenItem;
                             Equipment.WeaponId = chosenItem.Id;
                             Console.WriteLine($"You have equipped {chosenItem.Name}.");
-                            Console.WriteLine($"You have equipped {Equipment.Weapon.Name}.");
                             break;
                         }
                         else if (chosenItem.Type.Equals("Armor"))
@@ -200,7 +203,14 @@ namespace ConsoleRpgEntities.Models.Characters
                 for (int i = 0; i < Inventory.Items.Count; i++)
                 {
                     counter++;
-                    Console.WriteLine($"{counter}. {Inventory.Items.ElementAt(i).Name}, {Inventory.Items.ElementAt(i).Type}, Attack: {Inventory.Items.ElementAt(i).Attack}, Defense: {Inventory.Items.ElementAt(i).Defense}");
+                    if (Inventory.Items.ElementAt(i).Name.Equals(Equipment.Weapon.Name) || Inventory.Items.ElementAt(i).Name.Equals(Equipment.Armor.Name))
+                    {
+                        Console.WriteLine($"{counter}. {Inventory.Items.ElementAt(i).Name}, {Inventory.Items.ElementAt(i).Type}, Attack: {Inventory.Items.ElementAt(i).Attack}, Defense: {Inventory.Items.ElementAt(i).Defense} (Equipped)");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{counter}. {Inventory.Items.ElementAt(i).Name}, {Inventory.Items.ElementAt(i).Type}, Attack: {Inventory.Items.ElementAt(i).Attack}, Defense: {Inventory.Items.ElementAt(i).Defense}");
+                    }
                 }
 
                 try
@@ -215,12 +225,12 @@ namespace ConsoleRpgEntities.Models.Characters
                         otherItems.Add(chosenItem);
                         if (chosenItem.Type.Equals("Weapon"))
                         {
-                            Equipment.Weapon = new Item();
+                            this.Equipment.Weapon = null;
                             Equipment.WeaponId = null;
                         }
                         else if (chosenItem.Type.Equals("Armor"))
                         {
-                            Equipment.Armor = new Item();
+                            this.Equipment.Armor = null;
                             Equipment.ArmorId = null;
                         }
                         Inventory.Items.Remove(chosenItem);
