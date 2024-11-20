@@ -1,6 +1,6 @@
 ### Assignment: *Week 12 Assignment Program Notes*
 
-The first thing I did was update the Weight variable in the Item class as instructed, then apply the migration, and finally update the database with that migration.
+The first thing I did was update the Weight variable in the Item class as instructed, then apply the migration, and finally update the database with that migration. I also created an SQL script and its rollback counterpart for that migration.
 
 Step 1 was pretty much already done for me, since not only was their already an Inventory class being used by the Player class, but the Invenotry class contained within an ICollection list of Items.
 
