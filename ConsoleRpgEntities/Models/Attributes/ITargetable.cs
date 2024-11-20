@@ -1,4 +1,6 @@
-﻿namespace ConsoleRpgEntities.Models.Attributes;
+using ConsoleRpgEntities.Models.Equipments;
+
+namespace ConsoleRpgEntities.Models.Attributes;
 
 public interface ITargetable
 {
