@@ -75,6 +75,9 @@ namespace ConsoleRpgEntities.Migrations
                     b.Property<int>("AggressionLevel")
                         .HasColumnType("int");
 
+                    b.Property<int?>("EquipmentId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Health")
                         .HasColumnType("int");
 
@@ -87,6 +90,8 @@ namespace ConsoleRpgEntities.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EquipmentId");
 
                     b.ToTable("Monsters");
 
@@ -237,6 +242,15 @@ namespace ConsoleRpgEntities.Migrations
                         .HasForeignKey("PlayersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ConsoleRpgEntities.Models.Characters.Monsters.Monster", b =>
+                {
+                    b.HasOne("ConsoleRpgEntities.Models.Equipments.Equipment", "Equipment")
+                        .WithMany()
+                        .HasForeignKey("EquipmentId");
+
+                    b.Navigation("Equipment");
                 });
 
             modelBuilder.Entity("ConsoleRpgEntities.Models.Characters.Player", b =>
