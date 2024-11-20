@@ -1,0 +1,9 @@
+### Assignment: *Week 12 Assignment Program Notes*
+
+The first thing I did was update the Weight variable in the Item class as instructed, then apply the migration, and finally update the database with that migration.
+
+Step 1 was pretty much already done for me, since not only was their already an Inventory class being used by the Player class, but the Invenotry class contained within an ICollection list of Items.
+
+Step 2 is where I really got going, though. For search by name, I had the user input the name of the item they requested, and the program would bring up a list of items their player character has whose name fits the input provided. If not, a message will pop up saying that no items fit the provided input. Search by type is where I used the GroupBy method, using it for a nested foreach loop where the program displayed the player character's items and what type they were categorized under, being seprated as such with a little total at the end of each "mini-list." For the search by sort, I used the OrderBy method to list the items names alphabetically should the user select tos ort by name, while the other two use the OrderByDescending method, listing the player character's items by highest to lowest attack power/defense.
+
+For the menu stuff in Step 3, it was relatively simple, just listing the method in the file where they should be according to a switch statement. While this went as described for the GameEngine, I had to bring over _context, _player, and _playerItems variables to the MenuManager and instantiate them in the main method in order to get my Inventory Management methods to work over there. After that, it was a simple matter of bringing over and extrapolating the extra stuff from my Class 11 program and troubleshooting where necessary.
