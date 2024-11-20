@@ -6,6 +6,7 @@ public interface IMonster
 {
     int Id { get; set; }
     string Name { get; set; }
+    int Health { get; set; }
 
     void Attack(ITargetable target);
 }
