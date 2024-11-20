@@ -1,4 +1,5 @@
-﻿using ConsoleRpgEntities.Models.Attributes;
+using ConsoleRpgEntities.Models.Attributes;
+using ConsoleRpgEntities.Models.Equipments;
 
 namespace ConsoleRpgEntities.Models.Characters.Monsters
 {
@@ -10,12 +11,14 @@ namespace ConsoleRpgEntities.Models.Characters.Monsters
         public int AggressionLevel { get; set; }
         public string MonsterType { get; set; }
 
+        // Navigational properties
+        public virtual Equipment? Equipment { get; set; }
+
         protected Monster()
         {
 
         }
 
         public abstract void Attack(ITargetable target);
-
     }
 }
