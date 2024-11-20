@@ -11,6 +11,9 @@ namespace ConsoleRpgEntities.Models.Characters.Monsters
         public int AggressionLevel { get; set; }
         public string MonsterType { get; set; }
 
+        // Foreign key
+        public int? EquipmentId { get; set; }
+
         // Navigational properties
         public virtual Equipment? Equipment { get; set; }
 
