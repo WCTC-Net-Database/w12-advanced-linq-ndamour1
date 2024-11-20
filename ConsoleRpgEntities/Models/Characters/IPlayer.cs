@@ -7,11 +7,10 @@ public interface IPlayer
 {
     int Id { get; set; }
     string Name { get; set; }
+    int Health { get; set; }
 
     ICollection<Ability> Abilities { get; set; }
 
     void Attack(ITargetable target);
     void UseAbility(IAbility ability, ITargetable target);
-
-
 }
