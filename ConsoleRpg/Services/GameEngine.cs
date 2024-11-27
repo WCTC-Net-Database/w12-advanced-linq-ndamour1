@@ -46,7 +46,7 @@ public class GameEngine
                 _outputManager.WriteLine("Choose an action:", ConsoleColor.Cyan);
                 _outputManager.WriteLine("1. Attack");
                 _outputManager.WriteLine("2. Alter inventory");
-                _outputManager.WriteLine("3. Seach inventory");
+                _outputManager.WriteLine("3. Search inventory");
                 _outputManager.WriteLine("4. Quit");
 
                 _outputManager.Display();
